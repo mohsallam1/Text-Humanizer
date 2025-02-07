@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Text Humanizer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #10b981;
+            --dark: #111827;
+            --light: #f3f4f6;
+            --gray: #6b7280;
+            --success: #059669;
+            --warning: #d97706;
+            --error: #dc2626;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark) 0%, #1f2937 100%);
+            color: var(--light);
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--glass-bg);
+            border-radius: var(--radius);
+            backdrop-filter: blur(10px);
+        }
+
+        .title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .panel {
+            background: var(--glass-bg);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+
+        .panel:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            color: var(--light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            flex: 2;
+        }
+
+        .btn-secondary {
+            background: var(--glass-bg);
+            color: var(--light);
+            border: 1px solid var(--glass-border);
+            flex: 1;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--glass-bg);
+            border-radius: var(--radius);
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 1rem 2rem;
+            border-radius: var(--radius);
+            color: white;
+            transform: translateY(200%);
+            transition: var(--transition);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: var(--radius);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Advanced Text Humanizer</h1>
+            <p class="subtitle">Transform AI-generated text into natural human writing</p>
+        </header>
+
+        <main class="grid">
+            <div class="panel">
+                <div class="input-group">
+                    <label for="input-text">Input Text</label>
+                    <textarea id="input-text" placeholder="Paste your text here..."></textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="style">Writing Style</label>
+                    <select id="style">
+                        <option value="casual">Casual & Conversational</option>
+                        <option value="semi-formal">Semi-Formal</option>
+                        <option value="professional">Professional</option>
+                        <option value="academic">Academic</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="variation">Variation Level</label>
+                    <select id="variation">
+                        <option value="low">Low (Subtle Changes)</option>
+                        <option value="medium" selected>Medium (Balanced)</option>
+                        <option value="high">High (Significant Changes)</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="humanizeText()" class="btn-primary">
+                        <i class="fas fa-magic"></i> Humanize
+                    </button>
+                    <button onclick="clearText()" class="btn-secondary">
+                        <i class="fas fa-trash"></i> Clear
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="input-group">
+                    <label for="output-text">Humanized Text</label>
+                    <textarea id="output-text" readonly></textarea>
+                </div>
+
+                <div class="metrics">
+                    <div class="metric">
+                        <div id="naturalness" class="metric-value">0</div>
+                        <div class="metric-label">Naturalness</div>
+                    </div>
+                    <div class="metric">
+                        <div id="uniqueness" class="metric-value">0</div>
+                        <div class="metric-label">Uniqueness</div>
+                    </div>
+                    <div class="metric">
+                        <div id="human-score" class="metric-value">0</div>
+                        <div class="metric-label">Human Score</div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button onclick="copyText()" class="btn-primary">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                    <button onclick="downloadText()" class="btn-secondary">
+                        <i class="fas fa-download"></i> Save
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // Language patterns for different styles
+        const patterns = {
+            casual: {
+                openers: [
+                    "You know,", "Look,", "Here's the thing,", "Honestly,", 
+                    "I think", "The way I see it,", "In my experience,", "Listen,"
+                ],
+                transitions: [
+                    "plus", "also", "but then", "anyway", "besides", "btw",
+                    "get this", "here's the thing", "on top of that"
+                ],
+                fillers: [
+                    "kind of", "sort of", "like", "basically", "pretty much",
+                    "you know", "I mean", "actually", "probably"
+                ],
+                endPhrases: [
+                    "right?", "you know?", "if you think about it.", "that's for sure.",
+                    "no doubt about it.", "can't argue with that."
+                ]
+            },
+            "semi-formal": {
+                openers: [
+                    "Consider this:", "Interestingly,", "It's worth noting that",
+                    "From what I understand,", "Based on my experience,"
+                ],
+                transitions: [
+                    "additionally", "moreover", "also", "on top of that",
+                    "what's more", "not to mention", "besides that"
+                ],
+                fillers: [
+                    "generally", "typically", "usually", "for the most part",
+                    "in most cases", "more often than not"
+                ],
+                endPhrases: [
+                    "in my opinion.", "as far as I can tell.", "from what I've seen.",
+                    "based on the evidence."
+                ]
+            },
+            professional: {
+                openers: [
+                    "Notably,", "Significantly,", "Research indicates that",
+                    "Evidence suggests that", "Analysis shows that"
+                ],
+                transitions: [
+                    "furthermore", "moreover", "additionally", "consequently",
+                    "in addition", "similarly", "conversely"
+                ],
+                fillers: [
+                    "specifically", "particularly", "notably", "effectively",
+                    "primarily", "fundamentally"
+                ],
+                endPhrases: [
+                    "according to research.", "based on current data.",
+                    "as demonstrated by findings.", "as evidence indicates."
+                ]
+            },
+            academic: {
+                openers: [
+                    "Research demonstrates that", "Studies indicate that",
+                    "Evidence suggests that", "Analysis reveals that"
+                ],
+                transitions: [
+                    "furthermore", "moreover", "however", "nevertheless",
+                    "consequently", "conversely", "similarly"
+                ],
+                fillers: [
+                    "specifically", "particularly", "predominantly",
+                    "substantially", "significantly"
+                ],
+                endPhrases: [
+                    "according to the literature.", "as research indicates.",
+                    "based on empirical evidence.", "as studies demonstrate."
+                ]
+            }
+        };
+
+        // Natural language enhancement functions
+        function addVariations(text, style, level) {
+            const pattern = patterns[style];
+            const variationLevels = {
+                low: 0.2,
+                medium: 0.4,
+                high: 0.6
+            };
+            const probability = variationLevels[level];
+
+            // Split into sentences
+            let sentences = text.split(/(?<=[.!?])\s+/);
+
+            // Process each sentence
+            sentences = sentences.map((sentence, index) => {
+                let modified = sentence;
+
+                // Add sentence openers
+                if (index > 0 && Math.random() < probability) {
+                    const opener = pattern.openers[Math.floor(Math.random() * pattern.openers.length)];
+                    modified = `${opener} ${modified.toLowerCase()}`;
+                }
+
+                // Add filler words
+                if (Math.random() < probability) {
+                    const filler = pattern.fillers[Math.floor(Math.random() * pattern.fillers.length)];
+                    const words = modified.split(' ');
+                    const position = Math.floor(Math.random() * words.length);
+                    words.splice(position, 0, filler);
+                    modified = words.join(' ');
+                }
+
+                // Add end phrases occasionally
+                if (Math.random() < probability * 0.5) {
+                    const endPhrase = pattern.endPhrases[Math.floor(Math.random() * pattern.endPhrases.length)];
+                    modified = modified.replace(/[.!?]$/, ` ${endPhrase}`);
+                }
+
+                return modified;
+            });
+
+            // Add transitions between sentences
+            sentences = sentences.map((sentence, index) => {
+                if (index > 0 && Math.random() < probability) {
+                    const transition = pattern.transitions[Math.floor(Math.random() * pattern.transitions.length)];
+                    return `${transition}, ${sentence.toLowerCase()}`;
+                }
+                return sentence;
+            });
+
+            return sentences.join(' ');
+        }
+
+        function naturalizeText(text, style) {
+            // Replace formal structures with more natural ones
+            const replacements = {
+                "it is": style === "casual" ? "it's" : "it is",
+                "there is": style === "casual" ? "there's" : "there is",
+                "that is": style === "casual" ? "that's" : "that is",
+                "could not": style === "casual" ? "couldn't" : "could not",
+                "would not": style === "casual" ? "wouldn't" : "would not",
+                "should not": style === "casual" ? "shouldn't" : "should not",
+                "in order to": "to",
+                "due to the fact that": "because",
+                "despite the fact that": "although",
+                "in spite of the fact that": "although",
+                "in the event that": "if",
+                "in the process of": "while",
+                "with reference to": "about",
+                "in connection with": "about",
+                "with regard to": "about",
+                "in relation to": "about",
+                "concerning the matter of": "about",
+                "when it comes to": "about",
+                "for the purpose of": "to",
+                "in an effort to": "to",
+                "with the objective of": "to"
+            };
+
+            Object.entries(replacements).forEach(([formal, casual]) => {
+                const regex = new RegExp(`\\b${formal}\\b`, 'gi');
+                text = text.replace(regex, casual);
+            });
+
+            return text;
+        }
+
+        function addSentenceVariety(text) {
+            // Split into sentences
+            let sentences = text.split(/(?<=[.!?])\s+/);
+
+            // Randomly combine short sentences
+            sentences = sentences.reduce((acc, sentence, index) => {
+                if (index === 0) return [sentence];
+                
+                const prevSentence = acc[acc.length - 1];
+                const prevWords = prevSentence.split(' ').length;
+                const currentWords = sentence.split(' ').length;
+
+                if (prevWords < 8 && currentWords < 8 && Math.random() < 0.4) {
+                    // Combine with previous sentence using a conjunction
+                    const conjunctions = ['and', 'while', 'but', 'although', 'whereas'];
+                    const conjunction = conjunctions[Math.floor(Math.random() * conjunctions.length)];
+                    acc[acc.length - 1] = `${prevSentence.replace(/[.!?]$/, '')}, ${conjunction} ${sentence.toLowerCase()}`;
+                } else {
+                    acc.push(sentence);
+                }
+
+                return acc;
+            }, []);
+
+            return sentences.join(' ');
+        }
+
+        function calculateMetrics(text) {
+            return {
+                naturalness: calculateNaturalness(text),
+                uniqueness: calculateUniqueness(text),
+                humanScore: calculateHumanScore(text)
+            };
+        }
+
+        function calculateNaturalness(text) {
+            // Analyze sentence variety
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim());
+            const lengths = sentences.map(s => s.split(/\s+/).length);
+            const avgLength = lengths.reduce((a, b) => a + b, 0) / lengths.length;
+            const variance = lengths.reduce((sum, len) => sum + Math.pow(len - avgLength, 2), 0) / lengths.length;
+            
+            // Higher variance (within limits) indicates more natural writing
+            const varietyScore = Math.min(100, 100 - Math.sqrt(variance) * 5);
+
+            // Check for natural language patterns
+            const contractionScore = text.match(/('s|'t|'re|'ve|'ll|'d)\b/g)?.length || 0;
+            const transitionScore = text.match(/\b(however|moreover|therefore|thus|hence|also)\b/gi)?.length || 0;
+
+            return Math.round((varietyScore + (contractionScore * 10) + (transitionScore * 5)) / 3);
+        }
+
+        function calculateUniqueness(text) {
+            const words = text.toLowerCase().split(/\s+/);
+            const uniqueWords = new Set(words);
+            const uniquenessRatio = (uniqueWords.size / words.length) * 100;
+            
+            // Penalize very high ratios (might indicate machine-generated text)
+            return Math.min(100, Math.round(uniquenessRatio * (uniquenessRatio > 80 ? 0.8 : 1)));
+        }
+
+        function calculateHumanScore(text) {
+            const naturalness = calculateNaturalness(text);
+            const uniqueness = calculateUniqueness(text);
+            const repetitionPenalty = calculateRepetitionPenalty(text);
+            
+            return Math.round((naturalness + uniqueness + (100 - repetitionPenalty)) / 3);
+        }
+
+        function calculateRepetitionPenalty(text) {
+            const words = text.toLowerCase().split(/\s+/);
+            const wordFreq = {};
+            words.forEach(word => {
+                wordFreq[word] = (wordFreq[word] || 0) + 1;
+            });
+            
+            const repetitions = Object.values(wordFreq).filter(freq => freq > 2).length;
+            return Math.min(100, repetitions * 10);
+        }
+
+        // Main function to humanize text
+        function humanizeText() {
+            const inputText = document.getElementById('input-text').value.trim();
+            if (!inputText) {
+                showToast('Please enter some text', 'warning');
+                return;
+            }
+
+            try {
+                const style = document.getElementById('style').value;
+                const variation = document.getElementById('variation').value;
+
+                // Process text
+                let processedText = inputText;
+                processedText = naturalizeText(processedText, style);
+                processedText = addVariations(processedText, style, variation);
+                processedText = addSentenceVariety(processedText);
+
+                // Update output
+                document.getElementById('output-text').value = processedText;
+
+                // Calculate and update metrics
+                const metrics = calculateMetrics(processedText);
+                document.getElementById('naturalness').textContent = metrics.naturalness;
+                document.getElementById('uniqueness').textContent = metrics.uniqueness;
+                document.getElementById('human-score').textContent = metrics.humanScore;
+
+                showToast('Text humanized successfully!', 'success');
+            } catch (error) {
+                console.error('Error:', error);
+                showToast('Error processing text', 'error');
+            }
+        }
+
+        // Utility functions
+        function copyText() {
+            const outputText = document.getElementById('output-text').value;
+            if (!outputText) {
+                showToast('No text to copy', 'warning');
+                return;
+            }
+
+            navigator.clipboard.writeText(outputText)
+                .then(() => showToast('Text copied to clipboard!', 'success'))
+                .catch(() => showToast('Failed to copy text', 'error'));
+        }
+
+        function downloadText() {
+            const outputText = document.getElementById('output-text').value;
+            if (!outputText) {
+                showToast('No text to download', 'warning');
+                return;
+            }
+
+            const blob = new Blob([outputText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `humanized-text-${new Date().toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('Text downloaded successfully!', 'success');
+        }
+
+        function clearText() {
+            document.getElementById('input-text').value = '';
+            document.getElementById('output-text').value = '';
+            document.getElementById('naturalness').textContent = '0';
+            document.getElementById('uniqueness').textContent = '0';
+            document.getElementById('human-score').textContent = '0';
+            showToast('Text cleared', 'success');
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.style.background = 
+                type === 'success' ? 'var(--success)' :
+                type === 'warning' ? 'var(--warning)' :
+                'var(--error)';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+    </script>
+</body>
+</html>
