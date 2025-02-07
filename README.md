@@ -2,7 +2,7 @@
 
 A sophisticated web application that transforms AI-generated or formal text into more natural, human-like writing. This tool uses advanced language processing techniques to make text feel more authentic while maintaining its original meaning.
 
-![Text Humanizer Interface](https://via.placeholder.com/800x400)
+![Text Humanizer Interface](Screenshot 2025-02-07 190957.png)
 
 ## ✨ Features
 
