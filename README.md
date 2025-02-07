@@ -33,12 +33,12 @@ A **modern web application** designed to transform **AI-generated or overly form
 3. **Variation Level Selector:** Adjust how extensive the transformation should be.  
 4. **Metrics Panel:** View scores for Naturalness, Uniqueness, and Human Score after processing.  
 
-![Interface Design](./interface-screenshot.png) <!-- Replace with your actual screenshot -->
+![Interface Design](./ui.png) <!-- Replace with your actual screenshot -->
 
 ---
 
 ## 🚀 **Live Demo**
-[**Launch Advanced Text Humanizer**](https://example.com) <!-- Replace with your actual link -->
+[**Launch Advanced Text Humanizer**](https://stirring-figolla-89dc0a.netlify.app/) <!-- Replace with your actual link -->
 
 ---
 
