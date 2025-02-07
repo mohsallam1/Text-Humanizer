@@ -142,20 +142,6 @@ Features:
 - Real-time processing
 - Error handling
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to:
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request
-
-## ✍️ Authors
-
-- Your Name - *Initial work*
 
 ## 🌟 Acknowledgments
 
@@ -163,12 +149,6 @@ Contributions are welcome! Feel free to:
 - UI design influenced by modern web trends
 - Special thanks to all contributors
 
-## 📞 Support
-
-For support, please:
-- Open an issue in the repository
-- Send an email to [your-email@example.com]
-- Check the documentation
 
 ---
 Made with ❤️ for the open-source community
