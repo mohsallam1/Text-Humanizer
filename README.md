@@ -1,154 +1,51 @@
-# Advanced Text Humanizer 🎯
+# 🌟 Advanced Text Humanizer 🌟  
 
-A sophisticated web application that transforms AI-generated or formal text into more natural, human-like writing. This tool uses advanced language processing techniques to make text feel more authentic while maintaining its original meaning.
+A **modern web application** designed to transform **AI-generated or overly formal text** into **natural, human-like writing**. This project harnesses **language processing techniques** to ensure readability, variety, and creativity, while maintaining the **original meaning** of the input text.
 
-[Text Humanizer Interface](Screenshot 2025-02-07 190957.png)
-
-## ✨ Features
-
-- **Multiple Writing Styles**
-  - Casual & Conversational
-  - Semi-Formal
-  - Professional
-  - Academic
-
-- **Customizable Variation Levels**
-  - Low (Subtle Changes)
-  - Medium (Balanced)
-  - High (Significant Changes)
-
-- **Real-time Metrics**
-  - Naturalness Score
-  - Uniqueness Rating
-  - Overall Human Score
-
-- **Text Processing Capabilities**
-  - Smart sentence restructuring
-  - Natural language patterns
-  - Context-aware transitions
-  - Intelligent variation addition
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- No additional installations required
-
-### Usage
-
-1. **Input Text**
-   - Paste your text into the input field
-   - Select desired writing style
-   - Choose variation level
-
-2. **Process Text**
-   - Click "Humanize" button
-   - View transformed text in output field
-   - Check quality metrics
-
-3. **Export Results**
-   - Copy to clipboard
-   - Download as text file
-
-## 💡 How It Works
-
-The Text Humanizer employs several sophisticated algorithms to transform text:
-
-### Language Pattern Analysis
-- Identifies formal structures
-- Applies natural language patterns
-- Adds appropriate transitions
-
-### Style Adaptation
-- Adjusts tone based on selected style
-- Incorporates style-specific phrases
-- Maintains consistency throughout
-
-### Sentence Variety
-- Combines short sentences
-- Adds natural transitions
-- Varies sentence structure
-
-## 🎨 Customization Options
-
-### Writing Styles
-
-- **Casual & Conversational**
-  - Perfect for blog posts and social media
-  - Uses contractions and informal language
-  - Adds conversational markers
-
-- **Semi-Formal**
-  - Ideal for business communications
-  - Balances professionalism with accessibility
-  - Maintains engaging tone
-
-- **Professional**
-  - Suited for formal business documents
-  - Emphasizes clarity and precision
-  - Preserves professional tone
-
-- **Academic**
-  - Optimized for academic writing
-  - Incorporates scholarly language
-  - Maintains academic rigor
-
-### Variation Levels
-
-- **Low**
-  - Minimal changes to original text
-  - Focuses on basic naturalness
-  - Preserves original structure
-
-- **Medium**
-  - Balanced transformations
-  - Moderate sentence restructuring
-  - Natural language additions
-
-- **High**
-  - Significant rewording
-  - Enhanced sentence variety
-  - Maximum naturalness
-
-## 📊 Quality Metrics
-
-### Naturalness Score
-- Measures sentence variety
-- Analyzes language patterns
-- Evaluates flow and readability
-
-### Uniqueness Rating
-- Assesses word variety
-- Checks for repetition
-- Measures vocabulary richness
-
-### Human Score
-- Combines multiple metrics
-- Provides overall quality rating
-- Indicates text authenticity
-
-## 🛠️ Technical Details
-
-Built with:
-- HTML5
-- CSS3
-- Vanilla JavaScript
-- Font Awesome icons
-
-Features:
-- Responsive design
-- Modern glassmorphism UI
-- Real-time processing
-- Error handling
-
-
-## 🌟 Acknowledgments
-
-- Inspired by natural language processing techniques
-- UI design influenced by modern web trends
-- Special thanks to all contributors
-
+![App Preview](./image.png) <!-- Replace with your actual screenshot if needed -->
 
 ---
-Made with ❤️ for the open-source community
+
+## ✨ Features  
+- 🔍 **Multiple Writing Styles:**  
+  Choose from **Casual**, **Semi-Formal**, **Professional**, and **Academic** tones to suit different audiences.  
+
+- 🎨 **Text Variation Levels:**  
+  Adjust the level of transformation—choose between **Low (subtle changes)**, **Medium (balanced)**, or **High (significant changes)**.  
+
+- 📊 **Real-Time Text Metrics:**  
+  Measure **Naturalness**, **Uniqueness**, and the overall **Human Score** to evaluate text quality.  
+
+- ⚙️ **Built-In Enhancements:**  
+  - **Naturalization:** Replaces overly formal structures with more conversational language.  
+  - **Sentence Variety:** Improves flow by combining or splitting sentences where necessary.  
+  - **Filler and Transition Words:** Adds natural phrases for a more human touch.  
+
+- 💾 **Save and Copy Options:**  
+  - Easily **copy** the generated text or **download** it as a `.txt` file.  
+
+---
+
+## 📸 Application Interface
+### Key Sections:
+1. **Input Text Area:** Enter or paste the AI-generated/formal text to be transformed.  
+2. **Style Selection Dropdown:** Choose the desired writing style for the transformation.  
+3. **Variation Level Selector:** Adjust how extensive the transformation should be.  
+4. **Metrics Panel:** View scores for Naturalness, Uniqueness, and Human Score after processing.  
+
+![Interface Design](./interface-screenshot.png) <!-- Replace with your actual screenshot -->
+
+---
+
+## 🚀 **Live Demo**
+[**Launch Advanced Text Humanizer**](https://example.com) <!-- Replace with your actual link -->
+
+---
+
+## 🛠️ **Getting Started**
+To run this project locally, follow these instructions:
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/username/advanced-text-humanizer.git
+cd advanced-text-humanizer
