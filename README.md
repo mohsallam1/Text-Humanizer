@@ -47,5 +47,5 @@ To run this project locally, follow these instructions:
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/username/advanced-text-humanizer.git
+git clone https://github.com/mohsallam1/advanced-text-humanizer.git
 cd advanced-text-humanizer
